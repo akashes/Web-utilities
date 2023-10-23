@@ -1,0 +1,134 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="dob">
+    <button id="btn">Submit</button>
+
+    <div id="Days">00</div>
+  
+    <script>
+
+
+btn.addEventListener('click',()=>{
+     dob=document.getElementById('dob')
+        var dobDate=new Date('2001,4,9').getTime()
+        console.log(dobDate);
+        currentDate= new Date().getTime()
+        console.log(currentDate);
+        diff=currentDate-dobDate
+        console.log(diff);
+
+         var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+         alert(days)
+				
+
+         
+                 Days.innerText=days
+
+
+})
+            
+              -->
+
+                
+
+
+
+
+        
+
+
+<!-- 
+    
+       
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <label for="dob">Enter your Date of Birth:</label>
+    <input type="date" id="dob">
+    <button onclick="calculateAge()">Calculate Age</button>
+    <div id="ageResult"></div>
+
+    <script>
+
+
+function calculateAge() {
+    const dobInput = document.getElementById("dob").value;
+    const dob = new Date(dobInput);
+    const ageResult = document.getElementById("ageResult");
+
+    const ageInterval = setInterval(function() {
+        const now = new Date();
+        const ageInMilliseconds = now - dob;
+
+        const years = Math.floor(ageInMilliseconds / 31557600000); // Approximate milliseconds in a year
+
+        const months = Math.floor(ageInMilliseconds / 2629800000); // Approximate milliseconds in a month
+
+        const days = Math.floor(ageInMilliseconds / 86400000); // Milliseconds in a day
+
+        const hours = Math.floor(ageInMilliseconds / 3600000); // Milliseconds in an hour
+
+        const minutes = Math.floor(ageInMilliseconds / 60000); // Milliseconds in a minute
+
+        const seconds = Math.floor(ageInMilliseconds / 1000); // Milliseconds in a second
+
+        const ageResultText = `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+        ageResult.textContent = ageResultText;
+    }, 1000); // Update every 1 second
+}
+
+        // function calculateAge() {
+        //     const dobInput = document.getElementById("dob").value;
+        //     const dob = new Date(dobInput);
+        //     const currentDate = new Date();
+
+        //     const ageInterval = setInterval(function() {
+        //         const now = new Date();
+        //         const ageInMilliseconds = now - dob;
+
+        //         const years = Math.floor(ageInMilliseconds / 31557600000); // Approximate milliseconds in a year
+        //         ageInMilliseconds -= years * 31557600000;
+
+        //         const months = Math.floor(ageInMilliseconds / 2629800000); // Approximate milliseconds in a month
+        //         ageInMilliseconds -= months * 2629800000;
+
+        //         const days = Math.floor(ageInMilliseconds / 86400000); // Milliseconds in a day
+        //         ageInMilliseconds -= days * 86400000;
+
+        //         const hours = Math.floor(ageInMilliseconds / 3600000); // Milliseconds in an hour
+        //         ageInMilliseconds -= hours * 3600000;
+
+        //         const minutes = Math.floor(ageInMilliseconds / 60000); // Milliseconds in a minute
+        //         ageInMilliseconds -= minutes * 60000;
+
+        //         const seconds = Math.floor(ageInMilliseconds / 1000); // Milliseconds in a second
+
+        //         const ageResult = `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+        //         document.getElementById("ageResult").textContent = ageResult;
+        //     }, 1000); // Update every 1 second
+        // }
+    </script>
+</body>
+</html>
