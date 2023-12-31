@@ -1,3 +1,4 @@
+//BASIC FORM HANDLING IN REACT
 import React, { useState } from 'react'
 // getting values from form fields like text,radio button,select box ....
 function Register() {
