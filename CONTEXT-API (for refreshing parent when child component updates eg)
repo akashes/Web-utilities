@@ -1,0 +1,24 @@
+import React, { createContext, useState } from 'react'
+
+//context creation
+export const addProjectResponseContext=createContext()
+export const EditUserProjectResponseContext = createContext()
+
+function ContextShare({children}) {
+    const [addProjectRes,setAddProjectRes]=useState("")
+    const[editUserProjectRes,setEditUserProjectRes]=useState("")
+  return (
+    <>
+    {/* context provider */}
+    <addProjectResponseContext.Provider value={{addProjectRes,setAddProjectRes}}>
+      <EditUserProjectResponseContext.Provider value={{editUserProjectRes,setEditUserProjectRes}}>
+      {children}
+
+      </EditUserProjectResponseContext.Provider>
+    </addProjectResponseContext.Provider>
+      
+    </>
+  )
+}
+
+export default ContextShare
