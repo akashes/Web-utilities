@@ -1,0 +1,40 @@
+// const jwt = require('jsonwebtoken')
+
+// const generateJwt=()=>{
+
+//     const payload={
+//         name:"akash",
+//         age:23,
+//         role:"developer",
+//         hobby:'guitar'
+//     }
+//     const secretKey= 'akash123'
+
+//     const options ={
+//         expiresIn:60
+//     }
+    
+//     const token = jwt.sign(payload,secretKey,options)
+//     return token
+
+// }
+
+
+// const verifyJwt=(val)=>{
+//     try{
+
+//         const verify = jwt.verify(val,'akash123')
+//         return verify
+
+
+//     }catch(err){
+//         console.log(`couldnt verify jwt ${err.message}`);
+//     }
+   
+
+
+// }
+
+// const generatedToken = generateJwt()
+// console.log(generatedToken);
+// console.log(verifyJwt(generatedToken));
