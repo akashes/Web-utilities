@@ -1,0 +1,36 @@
+import { useState } from 'react';
+import './App.css';
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+
+function App() {
+  const[inputValue,setInputValue]=useState("")
+  const[isPickerVisible,setIsPickerVisible]=useState(false)
+
+  //function to add emoji to input state
+  const handleEmojiSelect=(e)=>{
+    setInputValue(inputValue+e.native)
+  }
+  return (
+  <>
+  <input type="text" value={inputValue} onChange={(e)=>setInputValue(e.target.value)} />
+  <button onClick={()=>setIsPickerVisible(!isPickerVisible)}>show</button>
+
+  //shows the emojis when button is clicked
+  {
+    isPickerVisible && ( <div>
+    <Picker data={data} 
+    onEmojiSelect={(e)=>{
+      handleEmojiSelect(e)
+      setIsPickerVisible(!isPickerVisible)
+    }}
+    previewPosition='none'
+     />
+
+    </div> ) 
+  }
+  </>
+  );
+}
+
+export default App;
