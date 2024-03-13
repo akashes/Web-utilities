@@ -1,0 +1,30 @@
+  const headerFn=(text)=>{
+    return <h2 className="text-2xl mt-4">{text}</h2>
+
+    
+  }
+  const descFn=(desc)=>{
+    return <p className="text-gray-500 text-sm">{desc}</p>
+
+  }
+  const combineFn=(header,description)=>{
+    return <>
+    {headerFn(header)}
+    {descFn(description)}
+    {}
+    </>
+    
+  }
+
+
+
+
+
+
+
+ {
+        combineFn('Description','description of the place')
+      }
+
+
+
