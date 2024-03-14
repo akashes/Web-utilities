@@ -1,0 +1,42 @@
+//axios call from frontend
+  const{data:filename}= await axios.post('/upload-by-link',{link:photoLink})
+
+
+
+//backend
+app.post('/upload-by-link',async(req,res)=>{
+    const{link}=req.body
+    try{
+        const newName ='photo'+ Date.now()+'.jpg'
+        await imageDownloader.image({
+            url:link,
+            dest:__dirname + '/uploads/'+ newName               //if name is not given will give error
+        })
+        res.status(200).json(newName)
+
+    }catch(err){
+        res.json(err)
+    }
+  
+})
+
+
+//backend middleware        // backend should also serve the uploads folder to the frontend 
+app.use('/uploads',express.static(__dirname+'/uploads')) 
+
+
+
+
+//acessing static files in frontend
+ {
+              addedPhotos.length>0 && addedPhotos.map((link)=>{
+                console.log('link hree is ',link);
+                return(
+                  <div>
+                  <img src={`http://localhost:4000/uploads/`+link} alt="" />
+                </div>
+                )
+              })
+              
+              
+             }
