@@ -1,0 +1,48 @@
+BASE URL
+--------------------
+
+const baseUrl = 'http://localhost:8080'
+
+export default baseUrl
+
+
+
+
+
+
+ALL API FILE
+-----------------------
+import baseUrl from "./baseUrl";
+import {commonAPI} from './commonApi'
+
+export const loginUser=async(user)=>{
+   return await commonAPI('post',`${baseUrl}/login`,user,"")
+
+}
+export const registerUser=async(user)=>{
+   return await commonAPI('post',`${baseUrl}/register`,user,"")
+
+}
+
+
+
+COMMONAPI FILE
+----------------------------
+import axios from 'axios'
+
+export const commonAPI = async(httpReq,url,reqBody,reqHeader)=>{
+    const reqConfig={
+        method:httpReq,
+        url,
+        data:reqBody,
+        headers:reqHeader?reqHeader:{"Content-Type":"application/json"}
+    }
+    console.log(reqConfig);
+    return await axios(reqConfig).then((result)=>{
+        return result
+    }).catch((err)=>{
+        console.log(err);
+    })
+
+}
+
