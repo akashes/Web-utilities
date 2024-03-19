@@ -1,0 +1,13 @@
+try{
+}catch(err){
+next(errorHandler(500,'something went wrong')   // must be imported properly, the function should use next as an argument
+}
+
+
+// middleware
+exports.errorHandler=(statusCode,message)=>{
+    const error = new Error()
+    error.statusCode = statusCode
+    error.message = message
+    return error
+}
