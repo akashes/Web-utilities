@@ -17,3 +17,5 @@ export const showFailedAlert=(message)=>{
 }
 
 //import these functions in the required components and also import <ToastContainer/> in the app/index.js
+
+npm i react-toastify
