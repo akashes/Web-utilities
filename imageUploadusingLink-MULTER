@@ -1,0 +1,109 @@
+import React, { useState } from "react";
+import axios from 'axios'
+
+function App() {
+  const[fileData,setFileData]=useState()
+
+  const fileChangeHandler=(e)=>{
+    setFileData(e.target.files[0])
+  }
+
+  const onSubmitHandler=(e)=>{
+    e.preventDefault()
+    const data = new FormData()  // for setting data in multipart/form data format
+    data.append('image',fileData)
+    axios.post('http://localhost:8800/upload-image',data).then((response)=>{
+      console.log(response);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+
+
+  return (
+    <>
+     <form action="http://localhost:8800/upload-image" method="POST" encType="multipart/form-data">
+      <input type="file" name="image"  />  
+      {/* the name should be same as what we used in the multer middleware with single() or array() */}
+<button type="submit">submit</button>
+     </form>
+      
+     <form action="http://localhost:8800/upload-images" method="POST" encType="multipart/form-data">
+      <input type="file" name="images" multiple  />  
+      {/* the name should be same as what we used in the multer middleware with single() or array() */}
+<button type="submit">submit</button>
+     </form>
+<hr />
+
+
+     <form action="" onSubmit={onSubmitHandler}>
+      <input type="file" name="" onChange={fileChangeHandler} id="" />
+      <button type="submit">submit file </button>
+     </form>
+
+     <div className="mt-8">
+      
+     </div>
+       
+    </>
+  );
+}
+
+export default App;
+
+//BACKEND---------------------------------------------------------------------------------------------------------------
+const express = require('express')
+const cors = require('cors')
+const download = require('image-downloader');
+
+const multer = require('multer')
+
+const fileStorageEngine=multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,'./uploads')
+
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+'--'+file.originalname)
+    }
+})
+
+//creating middleware
+const upload= multer({storage:fileStorageEngine})
+
+
+
+const app = express()
+app.use(express.json())
+app.use('/uploads',express.static(__dirname+'/uploads'))
+app.use(cors())
+
+app.get('/',(req,res)=>{
+    res.send('upload server started')
+})
+
+app.post('/upload-image',upload.single('image'),(req,res)=>{
+    console.log('inside upload image');
+    try{
+ //name inside single () should be same as the key of req
+ console.log(req.file);
+ res.send('file upload succesfull haha')
+    }catch(err){
+        console.log(err);
+    }
+   
+})
+
+//TO UPLOAD MULTIPLE IMAGES
+app.post('/upload-images',upload.array('images',3),(req,res)=>{
+    console.log(req.files);
+    res.send('uploaded multiple files')
+})
+
+
+const PORT = process.env.PORT || 8800
+app.listen(PORT,()=>{
+    console.log(`server started and listening in the port`);
+})
+
+
