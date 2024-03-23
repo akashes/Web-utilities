@@ -1,0 +1,40 @@
+//REGEX SEARCH EXAMPLE
+
+if(searchKey){
+                const query={
+                    address:{
+                        $regex:searchKey,
+                        $options:"i"
+                    }
+                }
+                res.json(await PlaceModel.find(query))
+        
+            }
+
+
+//DETAILED ------------------------------------------------------------
+const PlaceModel = require('../Models/PlaceModel')
+exports.showAllPlaces=async(req,res)=>{
+        try{
+            const{searchKey}=req.body
+            if(searchKey){
+                const query={
+                    address:{
+                        $regex:searchKey,
+                        $options:"i"
+                    }
+                }
+                res.json(await PlaceModel.find(query))
+        
+            }else{
+                res.json(await PlaceModel.find())
+            }
+            
+        
+    }catch(err){
+            res.status(500).json(err)
+        }
+       
+       
+
+}
