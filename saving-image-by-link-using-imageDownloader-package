@@ -1,0 +1,81 @@
+import axios from 'axios'
+import React, { useState } from 'react'
+
+function App() {
+  const[imageLink,setImageLink]=useState('')
+  const[addedLinks,setAddedLinks]=useState([])
+  console.log(addedLinks);
+  console.log(imageLink);
+
+  const handleImageUpload=async()=>{
+ const {data}= await axios.post('/upload-image',{link:imageLink})
+ console.log(data);
+ setAddedLinks(prev=>[...prev,data])
+    
+  }
+
+  return (
+ <>
+    <div>
+     
+       
+
+     <h2 className="text-2xl mt-4">Image Upload</h2>
+     <input value={imageLink} onChange={(e)=>setImageLink(e.target.value)}  type="text" name=""  id="" />
+    
+
+    
+
+
+     <button onClick={handleImageUpload} className="primary">submit</button>
+
+</div>
+<div className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
+  {
+    addedLinks.length>0 && addedLinks.map((link)=>(
+      <img src={`http://localhost:8800/uploads/${link}`} alt="" />
+    ))
+  }
+</div>
+ </>
+    
+  )
+}
+
+export default App
+//BACKEND---------------------------------------------------------------------------------------------------
+
+const express = require('express')
+const cors = require('cors')
+const download = require('image-downloader');
+
+
+const app = express()
+app.use(express.json())
+app.use('/uploads',express.static(__dirname+'/uploads'))
+app.use(cors())
+
+app.post('/upload-image',(req,res)=>{
+    const {link}=req.body
+    const newName='photo'+Date.now() + '.jpg'
+    const options={
+        url:link,
+        dest:__dirname+'/uploads/' +newName
+    }
+    download.image(options)
+    .then(({filename})=>{
+        res.status(200).json(newName)
+        console.log('saved to ',filename);
+    }).catch((err)=>{
+        console.log(err);
+    })
+})
+
+
+
+
+const PORT = process.env.PORT || 8800
+app.listen(PORT,()=>{
+    console.log(`server started and listening in the port`);
+})
+
