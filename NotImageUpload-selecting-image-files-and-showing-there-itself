@@ -1,0 +1,37 @@
+import React, { useState } from "react";
+
+function App() {
+  const [image, setImage] = useState("");
+  const[images,setImages]=useState([])
+  console.log(image.name);
+
+  const addImage=()=>{
+    setImages([...images,image])
+    console.log(images);
+  }
+  return (
+    <>
+      <input
+        type="file"
+        name=""
+        id=""
+        onChange={(e) => setImage(e.target.files[0])}
+        className="mt-8"
+      />
+      <button className="border p-3 rounded-xl" onClick={addImage}>upload</button>
+      <div className=" mt-8 border grid gap-2 gap-y-8 grid-cols-3 md:gird-cols-3 lg:grid-cols-6">
+      {
+       images.length>0 && images.map((item)=>{
+        console.log(item);
+        return(
+          <img width='200px' height="200px" src={URL.createObjectURL(item)} alt="" />
+        )
+       })
+      }
+      </div>
+      
+    </>
+  );
+}
+
+export default App;
