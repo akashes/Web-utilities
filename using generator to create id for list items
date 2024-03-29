@@ -1,0 +1,19 @@
+function* generateId(){
+    let idValue = 1
+    while(true){
+        yield idValue
+        idValue++
+    }
+
+}
+const generatorObject = generateId()
+
+
+const addInput=()=>{
+        const {value} =generatorObject.next()  //getting 1 value incremented id from generator function
+...................
+....................
+
+
+}
+NB: SHOULD USE OUTSIDE COMPONENT OTHEEWISE ALWAYS RETURN SAME ID
