@@ -1,0 +1,10 @@
+            state.filteredRestaurants = state.allRestaurants.filter((item) => {
+                const regex = new RegExp(action.payload, 'i'); // 'i' flag for case-insensitive matching
+                return regex.test(item.neighborhood);
+              });        
+
+
+
+
+
+         state.filteredRestaurants= state.allRestaurants.filter((item)=>item.neighborhood.toLowerCase().includes(action.payload))
