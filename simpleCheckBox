@@ -1,0 +1,84 @@
+import React, { useState, useEffect } from 'react';
+import TestChild from './TestChild';
+
+
+
+function MyForm() {
+const[items,setItems]=useState([
+  {
+    id:'1',
+    checked:false,
+    name:'book'
+  },
+  {
+    id:'2',
+    checked:false,
+    name:'pen'
+  },
+  {
+    id:'3',
+    checked:false,
+    name:'pencil'
+  },
+  {
+    id:'4',
+    checked:false,
+    name:'bottle'
+  },
+  {
+    id:'5',
+    checked:false,
+    name:'bag'
+  },
+  {
+    id:'6',
+    checked:false,
+    name:'umbrella'
+  },
+])
+const handleCheck=(itemId)=>{
+  setItems((prev)=>prev.map((ele)=>{
+return  ele.id===itemId ? {...ele,checked:true}:ele
+  }))
+}
+ 
+console.log(items);
+
+  return (
+    <>
+   {
+    items.map((ele)=>{
+      if(ele.checked===false){
+       return(
+        <label htmlFor="">   {ele.name}
+        <input onClick={()=>handleCheck(ele.id)} checked={ele.checked?true:false} key={ele.id} type="checkbox" name="" id="" />
+     </label>
+
+       )
+      }
+     
+
+    }
+     
+    )
+   }
+
+   <h1 className='text-4xl text-center font-bold'>checked values</h1>
+   {
+    items.map((item)=>{
+      if(item.checked===true){
+        return(
+          <li>{item.name}</li>
+        )
+      }
+    })
+   }
+    </>
+   
+
+    // <input style={{color:color}} type="text" onKeyDown={handleSomething} onKeyUp={handleKeyUp} />
+   
+  );
+}
+
+export default MyForm
