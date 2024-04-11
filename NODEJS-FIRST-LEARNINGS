@@ -1,0 +1,112 @@
+const path = require('path');
+const express = require('express')
+const {logEvents, logger} = require('./middleware/logEvents')
+const errorHandler =require('./middleware/errorHandler')
+const cors = require('cors')
+const app = express()
+const PORT = process.env.PORT || 3500;
+
+//custorm middleware logger
+app.use(logger)
+
+
+
+const whiteList = ['http://www.google.com','http://127.0.0.1:5500','http://localhost:3500']
+const corsOptions={
+    origin:(origin,callback)=>{
+        if(whiteList.indexOf(origin) !== -1 || !origin){
+            callback(null,true)
+        }else{
+            callback(new Error("Not allowed by CORS"))
+        }
+    },
+    optionSuccessStatus:200
+} 
+app.use(cors(corsOptions))
+
+
+
+app.use(express.urlencoded({extended:false})) // to handle form data
+app.use(express.json())
+app.use(express.static(path.join(__dirname,'/public')))
+
+app.get('/' ,(req,res)=>{
+    // res.sendFile('./views/index.html',{root:__dirname})
+    res.sendFile(path.join(__dirname,'views','index.html'))
+})
+app.get('/new-page(.html)?',(req,res)=>{
+    res.sendFile(path.join(__dirname,'views','new-page.html'))
+})
+
+//REDIRECTION
+app.get('/old-page(.html)?',(req,res)=>{
+    res.redirect(301,'./new-page.html') 
+})
+
+
+//1ST METHOD -ROUTE HANDLERS ACTING LIKE MIDDLEWARE
+app.get('/chain-handler',(req,res,next)=>{
+    console.log('first');
+    next()
+
+
+},(req,res)=>{
+    console.log('second');
+    res.send('Hello world')
+})
+
+
+
+
+//SECOND METHOD
+const one=(req,res,next)=>{
+    console.log('one');
+    next()
+    
+}
+const two=(req,res,next)=>{
+    console.log('two');
+    next()
+}
+const three=(req,res)=>{
+    console.log('three');
+    res.send('finished')
+}
+app.get('/chain(.html)?',[one,two,three])
+
+
+
+
+//INVALID ENDPOINT 
+//if status code not specified , then default will be 200 because the server is serving a file wich is a succesfull case
+app.get('/*',(req,res)=>{
+    res.status(404).sendFile(path.join(__dirname,'views','404.html'))
+})
+
+
+
+app.all('*',(req,res)=>{
+    res.status(404).sendFile(path.join(__dirname,'views','404.html'))
+    if(req.accepts('html')){
+        res.sendFile(path.join(__dirname,'views','404.html'))
+    }
+    else if(req.accepts('json')){
+        res.json({error:'404 Not Found'})
+    }
+    else{
+        res.type('txt').send('404 Not Found')
+    }
+}) // applies to all http methods and also supports regex
+
+
+
+
+//error handling
+// app.use(function(err,req,res,next){
+//     console.error(err.stack)
+//     res.status(500).send(err.message)
+// })
+
+app.use(errorHandler)
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
