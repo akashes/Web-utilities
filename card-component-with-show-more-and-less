@@ -1,0 +1,40 @@
+import React, { useState } from 'react'
+import { Card } from 'react-bootstrap'
+
+const NoteCard = ({note}) => {
+  const[isExpanded,setIsExpanded]=useState(false)
+  const toggleExpand=()=>{
+    setIsExpanded(!isExpanded)
+  }
+  const truncate=(content,wordLimit)=>{
+    const words = content.split(" ")
+    
+    if(words.length<=wordLimit){
+      return content
+    }else{
+      return words.slice(0,wordLimit).join(" ")+"...."
+    }
+
+  }
+  return (
+    <div class="card">
+    {/* <img src="https://via.placeholder.com/300x200" alt="Card Image" class="card-img"> */}
+    <div class="card-content">
+        <h3 class="card-title">{note.heading}</h3>
+        <p class="card-description">
+         {/* {note.content.length>20 ? note.content.slice(0,10)+"...":note.content} */}
+         {isExpanded?note.content:truncate(note.content,15)}
+
+          </p>
+        <button onClick={toggleExpand} class="card-button">
+          {
+            isExpanded ? 'show less' : ' show more'
+          }
+        </button>
+    </div>
+</div>
+   
+  )
+}
+
+export default NoteCard
