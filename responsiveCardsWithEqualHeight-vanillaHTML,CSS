@@ -1,0 +1,132 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #efefef;
+    line-height: 1.5;
+
+}
+
+a{
+    text-decoration: none;
+
+}
+
+.container{
+    width:1100px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+
+}
+
+.card{
+    /* flex:1 1 15rem; */
+    flex-basis: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-self: normal;
+    align-items: center;
+    
+    margin:10px 20px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    min-height: 500px;
+}
+.card img{
+    max-width: 200px;
+}
+.card h4{
+    font-size: 1.3rem;
+    text-transform: uppercase;
+}
+.card p{
+margin-bottom: 10px;}
+
+.card .btn{
+    margin-top: auto;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <img src="https://picsum.photos/200" alt="">
+                <h4>something</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel esse est, asperiores ratione reiciendis!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptate.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptate.</p>
+                <a href="#" class="btn"> Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/200" alt="">
+                <h4>something</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel esse est, asperiores ratione reiciendis!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptate.</p>
+                <a href="#" class="btn"> Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/200" alt="">
+                <h4>something</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel esse est, asperiores ratione reiciendis!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptate.</p>
+                <a href="#" class="btn"> Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/200" alt="">
+                <h4>something</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel esse est, asperiores ratione reiciendis!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptate.</p>
+                <a href="#" class="btn"> Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/200" alt="">
+                <h4>something</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel esse est, asperiores ratione reiciendis!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptate.</p>
+                <a href="#" class="btn"> Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/200" alt="">
+                <h4>something</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel esse est, asperiores ratione reiciendis!</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel esse est, asperiores ratione reiciendis!</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel esse est, asperiores ratione reiciendis!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptate.</p>
+                <a href="#" class="btn"> Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/200" alt="">
+                <h4>something</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel esse est, asperiores ratione reiciendis!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptate.</p>
+                <a href="#" class="btn"> Read More</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
