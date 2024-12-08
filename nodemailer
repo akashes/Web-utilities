@@ -1,0 +1,39 @@
+import nodemailer from 'nodemailer'
+
+const html = `
+
+<h1> Hello world </h>
+<p>Isnt nodemailer useful? </p>
+<img src='akashes5753279@gmail.com' width="400" />
+
+`
+
+async function main() {
+   const transporter= nodemailer.createTransport({
+        host:'smtp.gmail.com',
+        port:587,
+        secure: false,
+        requireTLS:true,
+        auth:{
+          
+            user: 'akashes5753279@gmail.com',
+            pass:"password"
+        }
+    })
+
+  const info =  await transporter.sendMail({
+
+    from:"akashes5753279@gmail.com",
+    to:"esakash80@gmail.com",
+    subject:"Testing 123",
+    html:html,
+    attachments:[
+        {filename: 'image.png', path: './image.png',cid:'akashes5753279@gmail.com'},
+    ]
+
+    })
+    console.log('message sent', info.messageId)
+    
+    
+}
+main().catch(e=>console.log(e))
