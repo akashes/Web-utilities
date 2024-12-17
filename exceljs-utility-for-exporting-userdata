@@ -1,0 +1,42 @@
+const exportUsersData=async(req,res)=>{
+    try {
+     const Workbook=new excelJs.Workbook()
+     const worksheet=  Workbook.addWorksheet("User Details")
+
+     worksheet.columns=[
+        {header:'S no.',key:"s_no"},
+        {header:'Name',key:"username"},
+        {header:'Email',key:"email"},
+        {header:'Mobile',key:"mobile"},
+        {header:'Image',key:"avatar"},
+        {header:'Is Admin',key:"isAdmin"},
+        {header:'Is verified',key:"isVerified"},
+     ]
+     let counter = 1
+   const userData= await User.find({isAdmin:0})
+   userData.forEach((user)=>{
+    user.s_no=counter
+    worksheet.addRow(user)
+    counter++
+   })
+
+   worksheet.getRow(1).eachCell((cell)=>{
+    cell.font={bold:true}
+   })
+
+   res.setHeader(
+    'Content-Type',
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+   )
+   res.setHeader(
+    'Content-Disposition',
+    `attachment; filename="users.xlsx`
+   )
+   return Workbook.xlsx.write(res).then(()=>{
+    res.status(200)
+   })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
