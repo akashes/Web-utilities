@@ -1,0 +1,38 @@
+const express = require('express');
+const fileUpload  = require('express-fileupload');
+const path = require('path');
+
+
+const app = express();
+const PORT = process.env.PORT || 8080
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.use(fileUpload())
+
+
+// app.use(fileUpload({
+//     useTempFiles:true,
+//     tempFileDir:'/tmp'
+// }))
+
+app.post('/upload',(req,res)=>{
+    console.log(req.files.img)
+    const uploadedFile = req.files.img
+    const uploadPath = path.join(__dirname,'uploads',uploadedFile.name)
+
+     uploadedFile.mv(uploadPath,(err)=>{
+
+        if(err){
+            return res.status(500).send(err)
+        }
+        res.send("File uploaded successfully ")
+     })
+})
+
+app.listen(PORT, () => {
+    console.log('-----------------------------');
+    console.log('-----------------------------');
+    console.log
