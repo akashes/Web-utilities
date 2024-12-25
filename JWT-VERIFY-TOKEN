@@ -1,0 +1,32 @@
+import jwt from 'jsonwebtoken'
+
+export const verifyToken=async(req,res,next)=>{
+
+
+
+    const BearerToken =  req.header('Authorization')
+    if(!BearerToken){
+        return res.status(401).json({
+            success:false,
+            message:'No token provided'
+        })
+    }
+
+        try {
+            //spliting done here not initally to avoid error 
+            const token = BearerToken.split(' ')[1];
+            const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+            console.log({decoded})
+            req.user = decoded
+            next()
+        
+            
+        } catch (error) {
+            return res.status(401).json({
+                success:false,
+                message:'Invalid token'
+            })
+             
+        } 
+    }
+
