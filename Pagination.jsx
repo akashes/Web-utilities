@@ -17,6 +17,7 @@
 
 // <Pagination filteredDishesCategory={filteredDishesCategory} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} />
 
+pagination
 
 
 
